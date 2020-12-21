@@ -1,0 +1,41 @@
+# default: &default
+#   adapter: sqlite3
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
+
+# development:
+#   <<: *default
+#   database: db/development.sqlite3
+
+# test:
+#   <<: *default
+#   database: db/test.sqlite3
+
+# production:
+#   <<: *default
+#   database: db/production.sqlite3
+
+
+# BELOW IS EXACTLY WHAT NEEDS TO BE HERE FOR PRODUCTION. ABOVE THIS LINE IS FOR DEVELOPMENT
+
+connection: &connection
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: admin
+
+development:
+  <<: *connection
+  database: jwt_rails_api_app_development
+
+
+test:
+  <<: *connection
+  database: jwt_rails_api_app_test
+
+
+production:
+  <<: *connection
+  database: jwt_rails_api_app_production
+  # password: <%= ENV['BOWLICIOUS_BACKEND_DATABASE_PASSWORD'] %>
